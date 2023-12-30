@@ -20,7 +20,55 @@ import { GrMail } from 'react-icons/gr'
 import { BsFillCheckSquareFill } from 'react-icons/bs'
 
 export const Form = () => {
+  const methods = useForm()
+  const [success, setSuccess] = useState(false)
+
+  const onSubmit = methods.handleSubmit(data => {
+    console.log(data)
+    methods.reset()
+    setSuccess(true)
+  })
+
+  const name_validation = {
+    name: 'name',
+    label: 'name',
+    type: 'text',
+    id: 'name',
+    placeholder: 'write your name ...',
+    validation: {
+      required: {
+        value: true,
+        message: 'required',
+      },
+      minLength: {
+        value: 2,
+        message: 'Min 2 characters',
+      },
+    },
+  }
+
   return (
-    <div className="text-center mt-5">Welcome to React Forms Tutorial!</div>
+    <FormProvider {...methods}>
+      <form
+        onSubmit={e => e.preventDefault()}
+        noValidate
+        autoComplete="off"
+        className="container"
+      >
+        <div className="grid gap-5 md:grid-cols-2">
+          <Input {...name_validation} />
+          <Input {...email_validation} />
+        </div>
+        <div className="mt-5">
+          <button
+            onClick={onSubmit}
+            className="flex items-center gap-1 p-5 font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-800"
+          >
+            <GrMail />
+            Submit Form
+          </button>
+        </div>
+      </form>
+    </FormProvider>
   )
 }

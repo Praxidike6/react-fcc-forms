@@ -79,7 +79,7 @@ export const email_validation = {
   label: 'email address',
   type: 'email',
   id: 'email',
-  placeholder: 'write a random email address',
+  placeholder: 'Enter email address',
   validation: {
     required: {
       value: true,
