@@ -23,6 +23,34 @@ export const name_validation = {
     },
   },
 }
+export const date_validation = {
+  name: 'date',
+  label: 'Date',
+  type: 'date',
+  id: 'date',
+  placeholder: 'write the booking date ...',
+  validation: {
+    required: {
+      value: true,
+      message: 'required',
+    },
+  },
+}
+export const time_validation = {
+  name: 'time',
+  label: 'Time',
+  type: 'time',
+  id: 'time',
+  min: '18:00',
+  max: '23:00',
+  placeholder: 'write the booking time ...',
+  validation: {
+    required: {
+      value: true,
+      message: 'required',
+    },
+  },
+}
 
 export const desc_validation = {
   name: 'description',
@@ -65,12 +93,14 @@ export const num_validation = {
   label: 'number',
   type: 'number',
   id: 'num',
-  placeholder: 'write a random number',
+  placeholder: 'No#',
   validation: {
     required: {
       value: true,
       message: 'required',
     },
+    max: { value: 10, message: 'Max is 10.' },
+    min: { value: 1, message: 'Min is 1.' },
   },
 }
 
@@ -79,16 +109,11 @@ export const email_validation = {
   label: 'email address',
   type: 'email',
   id: 'email',
-  placeholder: 'Enter email address',
+  placeholder: 'example@gmail.com',
   validation: {
     required: {
       value: true,
       message: 'required',
-    },
-    pattern: {
-      value:
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: 'not valid',
     },
   },
 }

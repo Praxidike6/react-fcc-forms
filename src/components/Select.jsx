@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------
-|  🐼 React FC Input
+|  🐼 React FC Select
 |
 |  🦝 Todo: CREATE RE-USEABLE INPUT COMPOENT
 |
@@ -12,7 +12,7 @@ import { useFormContext } from 'react-hook-form'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MdError } from 'react-icons/md'
 
-export const Input = ({ label, type, id, placeholder, validation, name }) => {
+export const Select = ({ type, id, options, name, validation }) => {
   const {
     register,
     formState: { errors },
@@ -20,12 +20,13 @@ export const Input = ({ label, type, id, placeholder, validation, name }) => {
 
   const inputError = findInputError(errors, name)
   const isinvalid = isFormInvalid(inputError)
-
+  //options.forEach(e => console.log(e))
+  //console.log(options)
   return (
     <div className="flex flex-col w-full gap-2">
       <div className="flex justify-between">
         <label htmlFor={id} className="font-semibold capitalize">
-          {label}
+          {name}
         </label>
         <AnimatePresence mode="wait" initial={false}>
           {isinvalid && (
@@ -36,15 +37,19 @@ export const Input = ({ label, type, id, placeholder, validation, name }) => {
           )}
         </AnimatePresence>
       </div>
-      <div>
-        <input
-          id={id}
-          type={type}
-          className="w-full p-5 font-medium border rounded-md border-slate-300 placeholder:opacity-60"
-          placeholder={placeholder}
-          {...register(name, validation)}
-        />
-      </div>
+
+      <select
+        {...register(name, validation)}
+        id={id}
+        type={type}
+        className="w-full p-5 font-medium border rounded-md border-slate-300 placeholder:opacity-60"
+      >
+        {options.map(option => (
+          <option value={option.value} key={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </div>
   )
 }

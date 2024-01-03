@@ -6,7 +6,9 @@
 |  🐸 Returns:  JSX
 *-------------------------------------------------------------------*/
 
-import { Input } from './components'
+import { DateInput, Input, Select } from './components'
+
+//import { Input, Select, MenuItem } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
 import {
   name_validation,
@@ -14,6 +16,8 @@ import {
   email_validation,
   num_validation,
   password_validation,
+  date_validation,
+  time_validation,
 } from './utils/inputValidations'
 import { useState } from 'react'
 import { GrMail } from 'react-icons/gr'
@@ -29,23 +33,50 @@ export const Form = () => {
     setSuccess(true)
   })
 
-  const name_validation = {
-    name: 'name',
-    label: 'name',
-    type: 'text',
-    id: 'name',
-    placeholder: 'write your name ...',
-    validation: {
-      required: {
-        value: true,
-        message: 'required',
-      },
-      minLength: {
-        value: 2,
-        message: 'Min 2 characters',
-      },
+  const noOfPeople = [
+    {
+      value: 1,
+      label: 'One',
     },
-  }
+    {
+      value: 2,
+      label: 'Two',
+    },
+    {
+      value: 3,
+      label: 'Three',
+    },
+    {
+      value: 4,
+      label: 'Four',
+    },
+    {
+      value: 5,
+      label: 'Five',
+    },
+  ]
+  const occasions = [
+    {
+      value: 'other',
+      label: '',
+    },
+    {
+      value: 'birthday',
+      label: 'Birthday',
+    },
+    {
+      value: 'wedding',
+      label: 'Wedding Anniversary',
+    },
+    {
+      value: 'engagement',
+      label: 'Engagement',
+    },
+    {
+      value: 'retirement',
+      label: 'Retirement',
+    },
+  ]
 
   return (
     <FormProvider {...methods}>
@@ -58,13 +89,27 @@ export const Form = () => {
         <div className="grid gap-5 md:grid-cols-2">
           <Input {...name_validation} />
           <Input {...email_validation} />
+          <Input {...date_validation} />
+          <Input {...time_validation} />
+
+          <Select
+            type="text"
+            id="occasion"
+            options={occasions}
+            name="occasion"
+          />
+          <Input
+            className="w-full"
+            {...num_validation}
+            label="No. of People (Min 1 - Max 10)"
+          />
         </div>
         <div className="mt-5">
           <button
+            aria-label="onClick"
             onClick={onSubmit}
             className="flex items-center gap-1 p-5 font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-800"
           >
-            <GrMail />
             Submit Form
           </button>
         </div>
